@@ -45,7 +45,9 @@ class Editor:
         self.midi_out.close_port()
         self.midi_out_port = self.midi_out.open_port(index)
         self.midi_out_name = self.midi_out.get_ports()[index]
-    def edit(self, loop):
+    def edit(self, loop = None):
+        if loop is None:
+            loop = Loop(8,['track 1'])
         title = self.gui.add_element(EditableText, (0,0), loop.title, colour = (0,0,0))
         length_value = self.gui.add_element(EditableText, (0,0), str(loop.length))
         length_control = self.gui.add_element(Row, (0,0), [self.gui.add_element(Text, (0,0), 'length:'), length_value], padding = 0)
@@ -280,13 +282,9 @@ class Loop:
         
 
 ed = Editor()
-loop = Loop(10, ['a','hello'])
-for i in range(10):
-    loop.write('a',i,59)
-for i in range(5):
-    loop.write('hello',i*2,48)
+
 try:
-    ed.edit(loop)
+    ed.edit()
 except Exception as e:
     print(repr(e))
     pg.quit()
