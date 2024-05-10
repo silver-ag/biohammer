@@ -163,6 +163,8 @@ class Editor:
                         elif elem == save_button:
                             filename = filechooser.save_file()[0]
                             if filename is not None:
+                                if '.' not in filename:
+                                    filename += '.bhmr'
                                 with open(filename, 'w+') as file:
                                     latest_saved = str(loop.serialise())
                                     file.write(latest_saved)
