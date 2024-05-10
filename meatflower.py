@@ -68,6 +68,10 @@ class BaseGuiElement:
         pass
     def destroy(self):
         pass
+    def enable(self):
+        self.gui.enable_element(self)
+    def disable(self):
+        self.gui.disable_element(self)
     def draw(self, surface):
         pg.draw.rect(surface, self.colour, self.rect)
         pg.draw.line(surface, contrasting_colour(self.colour), self.rect.topleft, tuple_map(lambda a,b: a+b, self.rect.topleft, self.rect.size))
